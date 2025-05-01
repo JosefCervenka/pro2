@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Lecturers</title>
+</head>
+<body>
+<h1 th:text="${lecturer != null ? 'Lecturer: ' + lecturer.name : 'Lecturer not found.'}"></h1>
+
+<a th:if="${lecturer != null}" th:href="@{'/lecturers/' + ${lecturer.id} + '/edit'}">Edit Lecturer</a>
+<a th:if="${lecturer != null}" th:href="@{'/lecturers/' + ${lecturer.id} + '/delete'}">Delete Lecturer</a>
+
+<a th:if="${lecturer == null}" th:href="@{/lecturers/}">Back to Lecturer List</a>
+
+</body>
+</html>

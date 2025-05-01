@@ -41,6 +41,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Boolean userExists(String username) {
+        var user = userRepository.findByUsername(username);
+
+        return !(user == null);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {

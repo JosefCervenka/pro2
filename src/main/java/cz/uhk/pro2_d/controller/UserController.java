@@ -2,7 +2,9 @@ package cz.uhk.pro2_d.controller;
 
 import cz.uhk.pro2_d.model.User;
 import cz.uhk.pro2_d.service.UserService;
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +63,4 @@ public class UserController {
         userService.deleteUser(id);
         return "redirect:/users/";
     }
-
-
 }

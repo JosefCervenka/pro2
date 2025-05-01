@@ -11,4 +11,5 @@ public interface UserService extends UserDetailsService {
     void saveUser(User user);
     User getUser(long id);
     void deleteUser(long id);
+    Boolean userExists(String username);
 }
