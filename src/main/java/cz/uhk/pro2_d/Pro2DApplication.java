@@ -1,7 +1,7 @@
 package cz.uhk.pro2_d;
 
 import cz.uhk.pro2_d.model.User;
-import cz.uhk.pro2_d.service.UserService;
+import cz.uhk.pro2_d.service.Interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,11 +12,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @SpringBootApplication
 public class Pro2DApplication {
 
-    private final UserService userService;
+    private final IUserService userService;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public Pro2DApplication(UserService userService, PasswordEncoder passwordEncoder) {
+    public Pro2DApplication(IUserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }

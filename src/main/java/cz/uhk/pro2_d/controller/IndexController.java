@@ -1,30 +1,23 @@
 package cz.uhk.pro2_d.controller;
 
 import cz.uhk.pro2_d.model.User;
-import cz.uhk.pro2_d.repository.UserRepository;
 import cz.uhk.pro2_d.security.MyUserDetails;
-import cz.uhk.pro2_d.service.UserServiceImpl;
+import cz.uhk.pro2_d.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.annotation.processing.Generated;
-
 @Controller
 public class IndexController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    MyUserDetails myUserDetails;
-
     @Autowired
-    public IndexController(UserServiceImpl userService, PasswordEncoder passwordEncoder) {
+    public IndexController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }

@@ -3,7 +3,7 @@ package cz.uhk.pro2_d;
 import cz.uhk.pro2_d.model.User;
 import cz.uhk.pro2_d.repository.UserRepository;
 import cz.uhk.pro2_d.security.MyUserDetails;
-import cz.uhk.pro2_d.service.UserServiceImpl;
+import cz.uhk.pro2_d.service.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -22,7 +22,7 @@ public class UserServiceImplTest {
     private UserRepository userRepository;
 
     @InjectMocks
-    private UserServiceImpl userService;
+    private UserService userService;
 
     private User user;
 

@@ -1,4 +1,4 @@
-package cz.uhk.pro2_d.service;
+package cz.uhk.pro2_d.service.Interfaces;
 
 import cz.uhk.pro2_d.model.Lecturer;
 import org.springframework.stereotype.Service;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface LecturerService {
+public interface ILecturerService {
     List<Lecturer> getAllLecturers();
     void saveLecturer(Lecturer lecturer);
     Lecturer getLecturer(long id);

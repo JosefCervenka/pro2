@@ -1,24 +1,20 @@
 package cz.uhk.pro2_d.controller;
 
 import cz.uhk.pro2_d.model.User;
-import cz.uhk.pro2_d.service.UserService;
-import jakarta.annotation.security.RolesAllowed;
+import cz.uhk.pro2_d.service.Interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
-    private UserService userService;
+    private IUserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(IUserService userService) {
         this.userService = userService;
     }
 

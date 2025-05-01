@@ -1,8 +1,9 @@
-package cz.uhk.pro2_d.service;
+package cz.uhk.pro2_d.service.service;
 
 import cz.uhk.pro2_d.model.User;
 import cz.uhk.pro2_d.repository.UserRepository;
 import cz.uhk.pro2_d.security.MyUserDetails;
+import cz.uhk.pro2_d.service.Interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,12 +11,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserService implements IUserService {
 
     private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserService(UserRepository userRepository) {
          this.userRepository = userRepository;
     }
 

@@ -1,19 +1,20 @@
-package cz.uhk.pro2_d.service;
+package cz.uhk.pro2_d.service.service;
 
 import cz.uhk.pro2_d.model.Lecturer;
 import cz.uhk.pro2_d.repository.LecturerRepository;
+import cz.uhk.pro2_d.service.Interfaces.ILecturerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class LecturerServiceImpl implements LecturerService {
+public class LecturerService implements ILecturerService {
 
     private final LecturerRepository lecturerRepository;
 
     @Autowired
-    public LecturerServiceImpl(LecturerRepository lecturerRepository) {
+    public LecturerService(LecturerRepository lecturerRepository) {
          this.lecturerRepository = lecturerRepository;
     }
 

@@ -1,19 +1,20 @@
-package cz.uhk.pro2_d.service;
+package cz.uhk.pro2_d.service.service;
 
 import cz.uhk.pro2_d.model.Course;
 import cz.uhk.pro2_d.repository.CourseRepository;
+import cz.uhk.pro2_d.service.Interfaces.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CourseServiceImpl implements CourseService {
+public class CourseService implements ICourseService {
 
     private final CourseRepository courseRepository;
 
     @Autowired
-    public CourseServiceImpl(CourseRepository courseRepository) {
+    public CourseService(CourseRepository courseRepository) {
          this.courseRepository = courseRepository;
     }
 

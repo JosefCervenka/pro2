@@ -1,8 +1,8 @@
 package cz.uhk.pro2_d.controller;
 
 import cz.uhk.pro2_d.model.Course;
-import cz.uhk.pro2_d.service.CourseService;
-import cz.uhk.pro2_d.service.LecturerService;
+import cz.uhk.pro2_d.service.Interfaces.ICourseService;
+import cz.uhk.pro2_d.service.Interfaces.ILecturerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/courses")
 public class CourseController {
 
-    private final CourseService courseService;
-    private final LecturerService lecturerService;
+    private final ICourseService courseService;
+    private final ILecturerService lecturerService;
 
     @Autowired
-    public CourseController(CourseService courseService, LecturerService lecturerService) {
+    public CourseController(ICourseService courseService, ILecturerService lecturerService) {
         this.courseService = courseService;
         this.lecturerService = lecturerService;
     }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<main layout:fragment="content">
+    <h2>Create person</h2>
+    <form th:action="@{/person/create}" th:object="${person}" method="post" enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label for="firstName" class="form-label">Firs name</label>
+            <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="middleName" class="form-label">Middle name</label>
+            <input type="text" class="form-control" id="middleName" th:field="*{middleName}" >
+        </div>
+
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last name</label>
+            <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="secondLastName" class="form-label">Second last name</label>
+            <input type="text" class="form-control" id="secondLastName" th:field="*{secondLastName}">
+        </div>
+
+        <div class="mb-3">
+            <label for="birdDate" class="form-label">Bird date</label>
+            <input type="date" class="form-control" id="birdDate" th:field="*{birdDate}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <select class="form-select" id="gender" th:field="*{gender}" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+<!--        <div class="mb-3">-->
+<!--            <label for="photo" class="form-label">Photo</label>-->
+<!--            <input type="file" class="form-control" id="photo" th:field="*{photo}" accept="image/*">-->
+<!--        </div>-->
+
+        <div class="mb-3">
+            <label for="nationality" class="form-label">Nacionality</label>
+            <input type="text" class="form-control" id="nationality" th:field="*{nationality}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</main>
