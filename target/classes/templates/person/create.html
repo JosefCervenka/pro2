@@ -7,6 +7,8 @@
     <h2>Create person</h2>
     <form th:action="@{/person/create}" th:object="${person}" method="post" enctype="multipart/form-data">
 
+        <input type="hidden" th:field="*{id}" th:value="person.id">
+
         <div class="mb-3">
             <label for="firstName" class="form-label">Firs name</label>
             <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
@@ -41,10 +43,10 @@
             </select>
         </div>
 
-<!--        <div class="mb-3">-->
-<!--            <label for="photo" class="form-label">Photo</label>-->
-<!--            <input type="file" class="form-control" id="photo" th:field="*{photo}" accept="image/*">-->
-<!--        </div>-->
+        <div class="mb-3">
+            <label for="file" class="form-label">Photo</label>
+            <input type="file" class="form-control" id="file" name="file" accept="image/*">
+        </div>
 
         <div class="mb-3">
             <label for="nationality" class="form-label">Nacionality</label>

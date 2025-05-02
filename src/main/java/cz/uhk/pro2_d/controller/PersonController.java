@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
@@ -40,7 +41,22 @@ public class PersonController {
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute Person person) {
+    public String create(@ModelAttribute Person person, @RequestParam("file") MultipartFile file) {
+        try {
+            var data = file.getBytes();
+
+            if(data.length > 0) {
+                person.setPhoto(data);
+            }
+            else{
+                person.setPhoto(personService.findById(person.getId()).getPhoto());
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/person/create";
+        }
+
         var newPerson = personService.save(person);
         return "redirect:/person/" + newPerson.getId();
     }
@@ -55,5 +71,11 @@ public class PersonController {
     public String update(Model model, @PathVariable Long id) {
         model.addAttribute("person", personService.findById(id));
         return "person/create";
+    }
+
+    @GetMapping("/photo/{id}")
+    public @ResponseBody byte[] photo(@PathVariable Long id)
+    {
+        return personService.findById(id).getPhoto();
     }
 }

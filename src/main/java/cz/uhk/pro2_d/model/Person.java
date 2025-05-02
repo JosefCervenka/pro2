@@ -1,9 +1,6 @@
 package cz.uhk.pro2_d.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.thymeleaf.spring6.processor.SpringOptionFieldTagProcessor;
 
@@ -30,6 +27,7 @@ public class Person {
 
     private String gender;
 
+    @Lob
     private byte[] photo;
 
     private String nationality;
