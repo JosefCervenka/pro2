@@ -4,27 +4,27 @@
       layout:decorate="~{layout}">
 
 <main layout:fragment="content">
-    <h1>People List</h1>
-
     <div class="container">
         <div class="row">
-            <div class="col-12" th:each="person : ${people}">
+            <div class="col-12">
                 <div class="card mb-3">
                     <div class="row no-gutters">
                         <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
-                            <img style="max-width: 100px; max-height: 150px; object-fit: cover;" th:src="'/person/photo/' + ${person.id}" class="card-img">
+                            <img  style="max-width: 100px; max-height: 150px; object-fit: cover;" th:src="'/film/photo/' + ${film.id}" class="card-img">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title m-2" th:text="${person.firstName} + ' ' + ${person.lastName}"></h5>
+                                <h5 class="card-title m-2" th:text="${film.name}"></h5>
                                 <p class="card-text m-2">
-                                    <strong>Gender: </strong><span th:text="${person.gender}"></span><br>
-                                    <strong>Nationality: </strong><span th:text="${person.nationality}"></span>
+                                    <strong>Genre: </strong><span th:text="${film.genre}"></span><br>
+                                    <strong>Origin: </strong><span th:text="${film.origin}"></span><br>
+                                    <strong>Date: </strong><span th:text="${film.dateOfCreation.getYear()}"></span>
                                 </p>
+                                <p class="card-text m-2" th:text="${film.description}"></p>
                                 <div class="d-flex">
-                                    <a class="btn btn-primary m-2" th:href="'person/' + ${person.id}">Detail</a>
-                                    <a class="btn btn-secondary m-2" th:href="'person/update/' + ${person.id}">Update</a>
-                                    <form method="post" th:action="'person/delete/' + ${person.id}">
+                                    <a class="btn btn-primary m-2" th:href="'/film'">Back to list</a>
+                                    <a class="btn btn-secondary m-2" th:href="'/film/update/' + ${film.id}">Update</a>
+                                    <form method="post" th:action="'/film/delete/' + ${film.id}">
                                         <button class="btn btn-danger m-2">Delete</button>
                                     </form>
                                 </div>
@@ -36,6 +36,4 @@
         </div>
     </div>
 
-
-    <a class="btn btn-primary" href="person/create">Create</a>
 </main>

@@ -7,14 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public interface IPersonService {
-    List<Person> findAll();
+public interface IPersonService extends IEntityService<Person> {
 
-    Person findById(long id);
-
-    Person save(Person person);
-
-    Person update(Person person);
-
-    Person delete(long id);
 }

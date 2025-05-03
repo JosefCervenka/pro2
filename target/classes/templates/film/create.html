@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<main layout:fragment="content">
+    <h2>Create film</h2>
+    <form th:action="@{/film/create}" th:object="${film}" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" th:field="*{id}" th:value="film.id">
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="origin" class="form-label">Origin</label>
+            <input type="text" class="form-control" id="origin" th:field="*{origin}" >
+        </div>
+
+        <div class="mb-3">
+            <label for="genre" class="form-label">Genre</label>
+            <input type="text" class="form-control" id="genre" th:field="*{genre}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea rows="5" class="form-control" id="description" th:field="*{description}">
+
+            </textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="dateOfCreation" class="form-label">Date of creation</label>
+            <input type="date" class="form-control" id="dateOfCreation" th:field="*{dateOfCreation}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="file" class="form-label">Photo</label>
+            <input type="file" class="form-control" id="file" name="file" accept="image/*">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</main>
