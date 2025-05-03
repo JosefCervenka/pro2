@@ -40,7 +40,7 @@ public class PersonService implements IPersonService {
     public Person delete(long id) {
         var person = personRepository.findById(id);
 
-        if (person.isEmpty() == false) {
+        if (person.isPresent()) {
             personRepository.delete(person.get());
             return person.get();
         }

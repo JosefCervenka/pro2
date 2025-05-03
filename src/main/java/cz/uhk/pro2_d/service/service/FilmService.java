@@ -40,7 +40,7 @@ public class FilmService implements IFilmService {
     public Film delete(long id) {
         var film = filmRepository.findById(id);
 
-        if (film.isEmpty() == false) {
+        if (film.isPresent()) {
             filmRepository.delete(film.get());
             return film.get();
         }

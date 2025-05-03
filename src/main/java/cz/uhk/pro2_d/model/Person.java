@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.thymeleaf.spring6.processor.SpringOptionFieldTagProcessor;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -31,6 +32,9 @@ public class Person {
     private byte[] photo;
 
     private String nationality;
+
+    @OneToMany(mappedBy = "actor")
+    private List<FilmRole> filmRoles;
 
     public Long getId() {
         return id;
@@ -102,5 +106,13 @@ public class Person {
 
     public void setNationality(String nationality) {
         this.nationality = nationality;
+    }
+
+    public List<FilmRole> getFilmRoles() {
+        return filmRoles;
+    }
+
+    public void setFilmRoles(List<FilmRole> filmRoles) {
+        this.filmRoles = filmRoles;
     }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Film {
@@ -11,6 +12,9 @@ public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany(mappedBy = "film")
+    private List<FilmRole> filmRoles;
 
     private String name;
 
@@ -81,5 +85,13 @@ public class Film {
 
     public void setPhoto(byte[] photo) {
         this.photo = photo;
+    }
+
+    public List<FilmRole> getFilmRoles() {
+        return filmRoles;
+    }
+
+    public void setFilmRoles(List<FilmRole> filmRoles) {
+        this.filmRoles = filmRoles;
     }
 }

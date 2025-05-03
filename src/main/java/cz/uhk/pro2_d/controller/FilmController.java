@@ -28,7 +28,9 @@ public class FilmController {
 
     @GetMapping("/{id}")
     public String get(@PathVariable Long id, Model model) {
-        model.addAttribute("film", filmService.findById(id));
+        var film = filmService.findById(id);
+        film.getFilmRoles();
+        model.addAttribute("film", film);
         return "film/detail";
     }
 

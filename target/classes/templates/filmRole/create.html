@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<main layout:fragment="content">
+    <h2>Create role</h2>
+    <form th:action="@{/filmRole/create}" th:object="${filmRole}" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" th:field="*{id}" th:value="filmRole.id">
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{roleName}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="actor" class="form-label">Actor</label>
+            <select class="form-control" id="actor" th:field="*{actor}">
+                <option th:each="person: ${people}"
+                        th:value="${person.id}" th:text="${person.firstName} + ' ' + ${person.lastName}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="film" class="form-label">Actor</label>
+            <select class="form-control" id="film" th:field="*{film}">
+                <option th:each="film: ${films}"
+                        th:value="${film.id}" th:text="${film.name}"></option>
+            </select>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</main>
