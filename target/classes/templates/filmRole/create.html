@@ -16,18 +16,22 @@
 
         <div class="mb-3">
             <label for="actor" class="form-label">Actor</label>
-            <select class="form-control" id="actor" th:field="*{actor}">
+            <select th:disabled="*{actor != null}" class="form-control" id="actor" th:field="*{actor}">
                 <option th:each="person: ${people}"
                         th:value="${person.id}" th:text="${person.firstName} + ' ' + ${person.lastName}"></option>
             </select>
+
+            <input th:if="*{actor != null}" type="hidden" th:field="*{actor}" th:value="*{actor.id}">
         </div>
 
         <div class="mb-3">
-            <label for="film" class="form-label">Actor</label>
-            <select class="form-control" id="film" th:field="*{film}">
+            <label for="film" class="form-label">Film</label>
+            <select th:disabled="*{film != null}" class="form-control" id="film" th:field="*{film}">
                 <option th:each="film: ${films}"
                         th:value="${film.id}" th:text="${film.name}"></option>
             </select>
+
+            <input th:if="*{film != null}" type="hidden" th:field="*{film}" th:value="*{film.id}">
         </div>
 
 

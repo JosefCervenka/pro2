@@ -27,8 +27,16 @@ public class FilmRoleController {
     }
 
     @GetMapping("/create")
-    public String create(Model model) {
-        model.addAttribute("filmRole", new FilmRole());
+    public String create(Model model, @RequestParam(required = false) Long personId, @RequestParam(required = false) Long filmId) {
+
+        var filmRole = new FilmRole();
+        if(personId != null) {
+            filmRole.setActor(personService.findById(personId));
+        }
+        if(filmId != null) {
+            filmRole.setFilm(filmService.findById(filmId));
+        }
+        model.addAttribute("filmRole", filmRole);
         model.addAttribute("films", filmService.findAll());
         model.addAttribute("people", personService.findAll());
 

@@ -2,7 +2,10 @@ package cz.uhk.pro2_d.controller;
 
 import cz.uhk.pro2_d.model.Film;
 import cz.uhk.pro2_d.model.Person;
+import cz.uhk.pro2_d.service.Interfaces.IFilmRoleService;
 import cz.uhk.pro2_d.service.Interfaces.IFilmService;
+import cz.uhk.pro2_d.service.Interfaces.IPersonService;
+import cz.uhk.pro2_d.service.service.FilmRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +18,12 @@ public class FilmController {
 
     private final IFilmService filmService;
 
+    private final IFilmRoleService filmRoleService;
+
     @Autowired
-    FilmController(IFilmService filmService) {
+    FilmController(IFilmService filmService, IFilmRoleService filmRoleService) {
         this.filmService = filmService;
+        this.filmRoleService = filmRoleService;
     }
 
     @GetMapping
@@ -63,6 +69,13 @@ public class FilmController {
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
+
+        var film = filmService.findById(id);
+
+        for (var role : film.getFilmRoles()) {
+            filmRoleService.delete(role.getId());
+        }
+
         filmService.delete(id);
         return "redirect:/film";
     }
