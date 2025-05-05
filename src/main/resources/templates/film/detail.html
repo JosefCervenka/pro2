@@ -10,7 +10,8 @@
                 <div class="card mb-3">
                     <div class="row no-gutters">
                         <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
-                            <img  style="max-width: 100px; max-height: 150px; object-fit: cover;" th:src="'/film/photo/' + ${film.id}" class="card-img">
+                            <img style="max-width: 100px; max-height: 150px; object-fit: cover;"
+                                 th:src="'/film/photo/' + ${film.id}" class="card-img">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -23,13 +24,18 @@
                                 <p class="card-text m-2" th:text="${film.description}"></p>
                                 <div>
                                     <h4 class="card-title m-2">Herci</h4>
+
                                     <span class="card-text m-2" th:each="role : ${film.filmRoles}">
-                                        <strong th:text="${role.roleName}"></strong>
-                                        (<a th:text="${role.actor.firstName} + ' ' + ${role.actor.lastName}" th:href="'/person/'+${role.actor.id}"></a>)
-                                        <br>
+                                        <form th:action="'/filmRole/delete/' + ${role.id}" class="m-2" method="post">
+                                            <strong th:text="${role.roleName}"></strong>
+                                            (<a th:text="${role.actor.firstName} + ' ' + ${role.actor.lastName}"
+                                                th:href="'/person/'+${role.actor.id}"></a>)
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete role</button>
+                                        </form>
                                     </span>
 
-                                    <a class="btn btn-primary m-2" th:href="'/filmRole/create?filmId='+${film.id}">Add role</a>
+                                    <a class="btn btn-primary m-2" th:href="'/filmRole/create?filmId='+${film.id}">Add
+                                        role</a>
                                 </div>
                                 <br>
                                 <div class="d-flex">
