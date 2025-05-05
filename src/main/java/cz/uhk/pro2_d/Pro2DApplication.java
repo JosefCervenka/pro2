@@ -21,13 +21,13 @@ public class Pro2DApplication {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Bean
-    public CommandLineRunner init() {
-        return args -> {
-            addUser("User", "user", "heslo", "USER");
-            addUser("Admin", "admin", "heslo", "ADMIN");
-        };
-    }
+//    @Bean
+//    public CommandLineRunner init() {
+//        return args -> {
+//            addUser("User", "user", "heslo", "USER");
+//            addUser("Admin", "admin", "heslo", "ADMIN");
+//        };
+//    }
 
     private void addUser(String name, String username, String password, String role) {
         User user = new User();

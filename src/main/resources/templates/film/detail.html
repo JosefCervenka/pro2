@@ -21,12 +21,12 @@
                                     <strong>Origin: </strong><span th:text="${film.origin}"></span><br>
                                     <strong>Date: </strong><span th:text="${film.dateOfCreation.getYear()}"></span>
                                 </p>
-                                <p class="card-text m-2" th:text="${film.description}"></p>
+                                <p class="card-text ms-2" th:text="${film.description}"></p>
                                 <div>
-                                    <h4 class="card-title m-2">Herci</h4>
+                                    <h4 class="card-title ms-2">Herci</h4>
 
-                                    <span class="card-text m-2" th:each="role : ${film.filmRoles}">
-                                        <form th:action="'/filmRole/delete/' + ${role.id}" class="m-2" method="post">
+                                    <span class="card-text ms-2" th:each="role : ${film.filmRoles}">
+                                        <form th:action="'/filmRole/delete/' + ${role.id}" class="ms-2" method="post">
                                             <strong th:text="${role.roleName}"></strong>
                                             (<a th:text="${role.actor.firstName} + ' ' + ${role.actor.lastName}"
                                                 th:href="'/person/'+${role.actor.id}"></a>)

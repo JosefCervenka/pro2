@@ -67,14 +67,13 @@ public class PersonController {
 
     @PostMapping("delete/{id}")
     public String delete(@PathVariable Long id) {
-        personService.delete(id);
-
         var person = personService.findById(id);
 
         for (var role : person.getFilmRoles()) {
             filmRoleService.delete(role.getId());
         }
 
+        personService.delete(id);
         return "redirect:/person";
     }
 
