@@ -2,11 +2,9 @@ package cz.uhk.pro2_d.model;
 
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.thymeleaf.spring6.processor.SpringOptionFieldTagProcessor;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 public class Person {
@@ -24,7 +22,10 @@ public class Person {
     private String secondLastName;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date birdDate;
+    private Date birthDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date deathDate;
 
     private String gender;
 
@@ -76,12 +77,12 @@ public class Person {
         this.secondLastName = secondLastName;
     }
 
-    public Date getBirdDate() {
-        return birdDate;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirdDate(Date birdDate) {
-        this.birdDate = birdDate;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getGender() {
@@ -114,5 +115,13 @@ public class Person {
 
     public void setFilmRoles(List<FilmRole> filmRoles) {
         this.filmRoles = filmRoles;
+    }
+
+    public Date getDeathDate() {
+        return deathDate;
+    }
+
+    public void setDeathDate(Date deathDate) {
+        this.deathDate = deathDate;
     }
 }

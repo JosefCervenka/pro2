@@ -20,7 +20,7 @@
                                 <p class="card-text m-2">
                                     <strong>Genre: </strong><span th:text="${film.genre}"></span><br>
                                     <strong>Origin: </strong><span th:text="${film.origin}"></span><br>
-                                    <strong>Origin: </strong><span th:text="${film.dateOfCreation}"></span>
+                                    <strong>Year of creation: </strong><span th:text="${#dates.format(film.dateOfCreation, 'yyyy')}"></span>
                                 </p>
                                 <div class="d-flex">
                                     <a class="btn btn-primary m-2" th:href="'film/' + ${film.id}">Detail</a>

@@ -19,7 +19,7 @@
                                 <p class="card-text m-2">
                                     <strong>Genre: </strong><span th:text="${film.genre}"></span><br>
                                     <strong>Origin: </strong><span th:text="${film.origin}"></span><br>
-                                    <strong>Date: </strong><span th:text="${film.dateOfCreation.getYear()}"></span>
+                                    <strong>Year of creation: </strong><span th:text="${#dates.format(film.dateOfCreation, 'yyyy')}"></span>
                                 </p>
                                 <p class="card-text ms-2" th:text="${film.description}"></p>
                                 <div>
