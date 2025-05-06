@@ -26,9 +26,10 @@
                                     <h4 class="card-title ms-2">Filmy</h4>
                                     <span class="card-text ms-2" >
                                         <form th:each="role : ${person.filmRoles}" th:action="'/filmRole/delete/' + ${role.id}" class="m-2" method="post">
-                                            <strong th:text="${role.roleName}"></strong>
-                                            (<a th:text="${role.film.name}" th:href="'/film/'+${role.film.id}"></a>)
+                                            <strong th:text="${role.roleName} + ' ('+ ${role.typeRole} +')'"></strong>
+                                            <a th:text="${role.film.name}" th:href="'/film/'+${role.film.id}"></a>
                                             <button type="submit" class="btn btn-sm btn-danger">Delete role</button>
+                                            <a class="btn btn-sm btn-secondary" th:href="'/filmRole/update/'+${role.id}">Update</a>
                                         </form>
                                         <br>
                                     </span>

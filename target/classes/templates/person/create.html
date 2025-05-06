@@ -4,7 +4,7 @@
       layout:decorate="~{layout}">
 
 <main layout:fragment="content">
-    <h2>Create person</h2>
+    <h2 th:text="${person.id == null ? 'Create person' : 'Edit person'}"></h2>
     <form th:action="@{/person/create}" th:object="${person}" method="post" enctype="multipart/form-data">
 
         <input type="hidden" th:field="*{id}" th:value="person.id">
@@ -53,6 +53,6 @@
             <input type="text" class="form-control" id="nationality" th:field="*{nationality}" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </main>

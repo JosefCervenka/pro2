@@ -58,7 +58,7 @@ public class FilmRoleController {
 
     @GetMapping("/update/{id}")
     public String update(Model model, @PathVariable Long id) {
-        model.addAttribute("film", filmRoleService.findById(id));
+        model.addAttribute("filmRole", filmRoleService.findById(id));
         model.addAttribute("films", filmService.findAll());
         model.addAttribute("people", personService.findAll());
 

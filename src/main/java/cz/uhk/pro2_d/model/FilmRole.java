@@ -14,6 +14,8 @@ public class FilmRole {
 
     private String roleName;
 
+    private String typeRole;
+
     @ManyToOne
     @JoinColumn(name = "actor_id")
     private Person actor;
@@ -52,5 +54,13 @@ public class FilmRole {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTypeRole() {
+        return typeRole;
+    }
+
+    public void setTypeRole(String typeRole) {
+        this.typeRole = typeRole;
     }
 }
