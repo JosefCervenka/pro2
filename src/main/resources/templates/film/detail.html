@@ -19,25 +19,40 @@
                                 <p class="card-text m-2">
                                     <strong>Genre: </strong><span th:text="${film.genre}"></span><br>
                                     <strong>Origin: </strong><span th:text="${film.origin}"></span><br>
-                                    <strong>Date: </strong><span th:text="${film.dateOfCreation.getYear()}"></span>
+                                    <strong>Year of creation: </strong><span
+                                        th:text="${#dates.format(film.dateOfCreation, 'yyyy')}"></span>
                                 </p>
                                 <p class="card-text ms-2" th:text="${film.description}"></p>
-                                <div>
-                                    <h4 class="card-title ms-2">Herci</h4>
 
-                                    <span class="card-text ms-2" th:each="role : ${film.filmRoles}">
+                                <h4 class="card-title ms-2">Actors</h4>
+                                <span class="card-text ms-2" th:each="role : ${film.filmRoles}">
                                         <form th:action="'/filmRole/delete/' + ${role.id}" class="ms-2" method="post">
                                             <strong th:text="${role.roleName} + ' (' + ${role.typeRole} + ')'"></strong>
                                             <a th:text="${role.actor.firstName} + ' ' + ${role.actor.lastName}"
-                                                th:href="'/person/'+${role.actor.id}"></a>
-                                            <button type="submit" class="btn btn-sm btn-danger">Delete role</button>
-                                            <a class="btn btn-sm btn-secondary" th:href="'/filmRole/update/'+${role.id}">Update</a>
+                                               th:href="'/person/'+${role.actor.id}"></a>
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                            <a class="btn btn-sm btn-secondary"
+                                               th:href="'/filmRole/update/'+${role.id}">Update</a>
                                         </form>
-                                    </span>
+                                </span>
+                                <a class="btn btn-primary m-2" th:href="'/filmRole/create?filmId='+${film.id}">Add</a>
 
-                                    <a class="btn btn-primary m-2" th:href="'/filmRole/create?filmId='+${film.id}">Add
-                                        role</a>
-                                </div>
+                                <h4 class="card-title ms-2">Comments</h4>
+                                <span class="card-text ms-2" th:each="comment : ${film.comments}">
+                                        <form th:action="'/comment/delete/' + ${comment.id}" class="ms-2" method="post">
+                                            <strong th:text="${comment.author.name} + ':'"></strong>
+                                            <span th:text="${comment.text}">
+
+                                            </span>
+
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete role</button>
+                                            <a class="btn btn-sm btn-secondary"
+                                               th:href="'/comment/update/'+${comment.id}">Update</a>
+                                        </form>
+                                </span>
+
+                                <a class="btn btn-primary m-2" th:href="'/comment/create?filmId='+${film.id}">Add</a>
+
                                 <br>
                                 <div class="d-flex">
                                     <a class="btn btn-primary m-2" th:href="'/film'">Back to list</a>

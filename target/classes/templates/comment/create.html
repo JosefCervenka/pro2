@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<main layout:fragment="content">
+  <h2 th:text="${comment.id == null ? 'Create comment' : 'Edit comment'}"></h2>
+  <form th:action="@{/comment/create}" th:object="${comment}" method="post" enctype="multipart/form-data">
+
+    <input type="hidden" th:field="*{id}" th:value="comment.id">
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Film</label>
+      <input disabled type="text" class="form-control" id="name" th:field="*{film.name}" required>
+      <input type="hidden" th:field="*{film.id}" th:value="*{film.id}">
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Text</label>
+      <textarea rows="5" class="form-control" id="description" th:field="*{text}">
+
+      </textarea>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</main>

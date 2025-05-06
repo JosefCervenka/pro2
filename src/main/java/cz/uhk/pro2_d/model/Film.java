@@ -16,6 +16,9 @@ public class Film {
     @OneToMany(mappedBy = "film")
     private List<FilmRole> filmRoles;
 
+    @OneToMany(mappedBy = "film")
+    private List<Comment> comments;
+
     private String name;
 
     private String origin;
@@ -93,5 +96,13 @@ public class Film {
 
     public void setFilmRoles(List<FilmRole> filmRoles) {
         this.filmRoles = filmRoles;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

@@ -1,6 +1,9 @@
 package cz.uhk.pro2_d.controller;
 
 import cz.uhk.pro2_d.model.FilmRole;
+import cz.uhk.pro2_d.service.Interfaces.IFilmRoleService;
+import cz.uhk.pro2_d.service.Interfaces.IFilmService;
+import cz.uhk.pro2_d.service.Interfaces.IPersonService;
 import cz.uhk.pro2_d.service.service.FilmRoleService;
 import cz.uhk.pro2_d.service.service.FilmService;
 import cz.uhk.pro2_d.service.service.PersonService;
@@ -13,14 +16,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/filmRole")
 public class FilmRoleController {
 
-    private final FilmRoleService filmRoleService;
+    private final IFilmRoleService filmRoleService;
 
-    private final FilmService filmService;
+    private final IFilmService filmService;
 
-    private final PersonService personService;
+    private final IPersonService personService;
 
     @Autowired
-    public FilmRoleController(FilmRoleService filmRoleService, FilmService filmService, PersonService personService) {
+    public FilmRoleController(IFilmRoleService filmRoleService, IFilmService filmService, IPersonService personService) {
         this.filmRoleService = filmRoleService;
         this.filmService = filmService;
         this.personService = personService;

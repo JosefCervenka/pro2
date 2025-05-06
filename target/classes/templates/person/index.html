@@ -20,7 +20,8 @@
                                 <p class="card-text m-2">
                                     <strong>Gender: </strong><span th:text="${person.gender}"></span><br>
                                     <strong>Nationality: </strong><span th:text="${person.nationality}"></span><br>
-                                    <strong>Bird date: </strong><span th:text="${person.birdDate}"></span>
+                                    <strong>Birth date: </strong><span th:text="${#dates.format(person.birthDate, 'dd.MM yyyy')}"></span><br th:if="${person.deathDate != null}">
+                                    <strong th:if="${person.deathDate != null}">Death date: </strong><span th:if="${person.deathDate != null}" th:text="${#dates.format(person.deathDate, 'dd.MM yyyy')}"></span>
                                 </p>
                                 <div class="d-flex">
                                     <a class="btn btn-primary m-2" th:href="'person/' + ${person.id}">Detail</a>

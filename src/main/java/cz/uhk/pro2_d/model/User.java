@@ -2,6 +2,8 @@ package cz.uhk.pro2_d.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -13,6 +15,9 @@ public class User {
     private String username;
     private String password;
     private String role;
+
+    @OneToMany(mappedBy = "author")
+    private List<Comment> comments;
 
     public String getUsername() {
         return username;
