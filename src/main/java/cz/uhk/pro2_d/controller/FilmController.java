@@ -7,6 +7,7 @@ import cz.uhk.pro2_d.service.Interfaces.IFilmService;
 import cz.uhk.pro2_d.service.Interfaces.IPersonService;
 import cz.uhk.pro2_d.service.service.FilmRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,12 +41,14 @@ public class FilmController {
         return "film/detail";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("film", new Film());
         return "film/create";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public String create(@ModelAttribute Film film, @RequestParam("file") MultipartFile file) {
         try {
@@ -67,6 +70,7 @@ public class FilmController {
         return "redirect:/film/" + newFilm.getId();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
 
@@ -80,6 +84,7 @@ public class FilmController {
         return "redirect:/film";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/update/{id}")
     public String update(Model model, @PathVariable Long id) {
         model.addAttribute("film", filmService.findById(id));

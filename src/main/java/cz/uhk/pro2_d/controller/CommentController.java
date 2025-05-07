@@ -10,6 +10,7 @@ import cz.uhk.pro2_d.service.Interfaces.IUserService;
 import cz.uhk.pro2_d.service.service.CommentService;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +29,6 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-
     @GetMapping("/create")
     public String create(Model model, @RequestParam Long filmId, @AuthenticationPrincipal MyUserDetails userDetails) {
         var comment = new Comment();
@@ -39,13 +39,13 @@ public class CommentController {
         return "comment/create";
     }
 
+
     @PostMapping("/create")
     public String create(@ModelAttribute Comment comment, @AuthenticationPrincipal MyUserDetails userDetails) {
         comment.setAuthor(userDetails.getUser());
         commentService.save(comment);
         return "redirect:/film/"+comment.getFilm().getId();
     }
-
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {

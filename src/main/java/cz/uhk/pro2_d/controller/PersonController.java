@@ -5,6 +5,7 @@ import cz.uhk.pro2_d.model.Person;
 import cz.uhk.pro2_d.service.Interfaces.IFilmRoleService;
 import cz.uhk.pro2_d.service.Interfaces.IPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,12 +39,14 @@ public class PersonController {
         return "person/detail";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("person", new Person());
         return "person/create";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public String create(@ModelAttribute Person person, @RequestParam("file") MultipartFile file) {
         try {
@@ -65,6 +68,7 @@ public class PersonController {
         return "redirect:/person/" + newPerson.getId();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("delete/{id}")
     public String delete(@PathVariable Long id) {
         var person = personService.findById(id);
@@ -77,6 +81,7 @@ public class PersonController {
         return "redirect:/person";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/update/{id}")
     public String update(Model model, @PathVariable Long id) {
         model.addAttribute("person", personService.findById(id));
