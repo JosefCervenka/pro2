@@ -29,12 +29,12 @@
                                         <form th:each="role : ${person.filmRoles}" th:action="'/filmRole/delete/' + ${role.id}" class="m-2" method="post">
                                             <strong th:text="${role.roleName} + ' ('+ ${role.typeRole} +')'"></strong>
                                             <a th:text="${role.film.name}" th:href="'/film/'+${role.film.id}"></a>
-                                            <button type="submit" class="btn btn-sm btn-danger">Delete role</button>
-                                            <a class="btn btn-sm btn-secondary" th:href="'/filmRole/update/'+${role.id}">Update</a>
+                                            <button sec:authorize="hasRole('ROLE_ADMIN')" type="submit" class="btn btn-sm btn-danger">Delete role</button>
+                                            <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-sm btn-secondary" th:href="'/filmRole/update/'+${role.id}">Update</a>
                                         </form>
                                         <br>
                                     </span>
-                                    <a class="btn btn-primary m-2" th:href="'/filmRole/create?personId='+${person.id}">
+                                    <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary m-2" th:href="'/filmRole/create?personId='+${person.id}">
                                         Add role
                                     </a>
                                 </div>
@@ -42,10 +42,10 @@
                                 <br>
                                 <div class="d-flex">
                                     <a class="btn btn-primary m-2" th:href="'/person'">Back to list</a>
-                                    <a class="btn btn-secondary m-2"
+                                    <a class="btn btn-secondary m-2" sec:authorize="hasRole('ROLE_ADMIN')"
                                        th:href="'/person/update/' + ${person.id}">Update</a>
                                     <form method="post" th:action="'/person/delete/' + ${person.id}">
-                                        <button class="btn btn-danger m-2">Delete</button>
+                                        <button sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger m-2">Delete</button>
                                     </form>
                                 </div>
                             </div>
