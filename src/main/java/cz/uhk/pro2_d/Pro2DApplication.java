@@ -24,12 +24,12 @@ public class Pro2DApplication {
     @Bean
     public CommandLineRunner init() {
         return args -> {
-            addUser("Admin", "admin", "heslo", "ADMIN");
+            addUser("admin", "admin", "heslo", "ADMIN");
         };
     }
 
     private void addUser(String name, String username, String password, String role) {
-        if(userService.userExists(name)) {
+        if(userService.userExists(username)) {
             return;
         }
 
