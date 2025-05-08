@@ -42,21 +42,54 @@ public class CommentController {
 
     @PostMapping("/create")
     public String create(@ModelAttribute Comment comment, @AuthenticationPrincipal MyUserDetails userDetails) {
-        comment.setAuthor(userDetails.getUser());
-        commentService.save(comment);
-        return "redirect:/film/"+comment.getFilm().getId();
+        var currentUser = userDetails.getUser();
+        comment.setAuthor(currentUser);
+
+        if (comment.getId() == null) {
+            commentService.save(comment);
+            return "redirect:/film/" + comment.getFilm().getId();
+        }
+        if (currentUser.getId() == commentService.findById(comment.getId()).getAuthor().getId()) {
+            commentService.save(comment);
+            return "redirect:/film/" + comment.getFilm().getId();
+        }
+        if (currentUser.getRole().equals("ADMIN")) {
+            commentService.save(comment);
+            return "redirect:/film/" + comment.getFilm().getId();
+        }
+
+        return "redirect:/403";
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable Long id) {
-        var comment = commentService.delete(id);
-        return "redirect:/film/"+comment.getFilm().getId();
+    public String delete(@PathVariable Long id, @AuthenticationPrincipal MyUserDetails userDetails) {
+        var currentUser = userDetails.getUser();
+
+        if (currentUser.getId() == commentService.findById(id).getAuthor().getId()) {
+            var comment = commentService.delete(id);
+            return "redirect:/film/" + comment.getFilm().getId();
+        }
+        if (currentUser.getRole().equals("ADMIN")) {
+            var comment = commentService.delete(id);
+            return "redirect:/film/" + comment.getFilm().getId();
+        }
+
+        return "redirect:/403";
     }
 
     @GetMapping("/update/{id}")
-    public String update(Model model, @PathVariable Long id) {
-        model.addAttribute("comment", commentService.findById(id));
+    public String update(Model model, @PathVariable Long id, @AuthenticationPrincipal MyUserDetails userDetails) {
 
-        return "comment/create";
+        var currentUser = userDetails.getUser();
+        var comment = commentService.findById(id);
+        model.addAttribute("comment", comment);
+
+        if(comment.getAuthor().getId() == currentUser.getId()) {
+            return "comment/create";
+        }
+        if (currentUser.getRole().equals("ADMIN")) {
+            return "comment/create";
+        }
+        return "redirect:/403";
     }
 }

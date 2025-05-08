@@ -2,12 +2,14 @@ package cz.uhk.pro2_d.controller;
 
 import cz.uhk.pro2_d.model.Film;
 import cz.uhk.pro2_d.model.Person;
+import cz.uhk.pro2_d.security.MyUserDetails;
 import cz.uhk.pro2_d.service.Interfaces.IFilmRoleService;
 import cz.uhk.pro2_d.service.Interfaces.IFilmService;
 import cz.uhk.pro2_d.service.Interfaces.IPersonService;
 import cz.uhk.pro2_d.service.service.FilmRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,10 +36,12 @@ public class FilmController {
     }
 
     @GetMapping("/{id}")
-    public String get(@PathVariable Long id, Model model) {
+    public String get(@PathVariable Long id, Model model, @AuthenticationPrincipal MyUserDetails userDetails) {
         var film = filmService.findById(id);
-        film.getFilmRoles();
+        var currentUser = userDetails.getUser();
         model.addAttribute("film", film);
+        model.addAttribute("currentUser", currentUser);
+
         return "film/detail";
     }
 
