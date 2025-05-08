@@ -58,4 +58,12 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 }

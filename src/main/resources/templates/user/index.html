@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+
+<main layout:fragment="content">
+    <h1>User List</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12" th:each="user : ${users}">
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="card-body" style="display: flex">
+                            <h5 class="card-title m-2" th:text="${user.name} + ' (' + ${user.role} + ')'"></h5>
+                            <a class="btn btn-primary m-2" th:href="'user/' + ${user.id}">Detail</a>
+                            <a class="btn btn-secondary m-2" th:href="'user/update/' + ${user.id}">Update</a>
+                            <form method="post" th:action="'user/delete/' + ${user.id}">
+                                <button class="btn btn-danger m-2">Delete</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <a class="btn btn-primary" href="user/create">Create</a>
+</main>

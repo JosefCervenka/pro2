@@ -24,7 +24,7 @@
                                     <strong th:if="${person.deathDate != null}">Death date: </strong><span th:if="${person.deathDate != null}" th:text="${#dates.format(person.deathDate, 'dd.MM yyyy')}"></span>
                                 </p>
                                 <div>
-                                    <h4 class="card-title ms-2">Filmy</h4>
+                                    <h4 class="card-title ms-2">Films</h4>
                                     <span class="card-text ms-2" >
                                         <form th:each="role : ${person.filmRoles}" th:action="'/filmRole/delete/' + ${role.id}" class="m-2" method="post">
                                             <strong th:text="${role.roleName} + ' ('+ ${role.typeRole} +')'"></strong>

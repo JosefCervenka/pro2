@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<body>
+<main layout:fragment="content">
+    <h2 th:text="${user.id == null ? 'Create person' : 'Edit person'}"></h2>
+    <form th:action="@{/user/create}" th:object="${user}" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" th:field="*{id}" th:value="user.id">
+
+        <div class="mb-3">
+            <label for="username" class="form-label">User name</label>
+            <input type="text" class="form-control" id="username" th:field="*{username}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" >
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="form-label">Role</label>
+            <select class="form-select" id="gender" th:field="*{role}" required>
+                <option value="USER">User</option>
+                <option value="ADMIN">Admin</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</main>

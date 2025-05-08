@@ -1,70 +1,73 @@
 package cz.uhk.pro2_d.controller;
 
 import cz.uhk.pro2_d.model.User;
+import cz.uhk.pro2_d.service.Interfaces.ICommentService;
 import cz.uhk.pro2_d.service.Interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     private IUserService userService;
+    private ICommentService commentService;
 
     @Autowired
-    public UserController(IUserService userService) {
+    public UserController(IUserService userService, ICommentService commentService) {
         this.userService = userService;
+        this.commentService = commentService;
     }
 
-    //@PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/")
+    @GetMapping
     public String list(Model model) {
         model.addAttribute("users", userService.getAllUsers());
-        return "users_list";
+        return "user/index";
     }
 
-    //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public String detail(Model model, @PathVariable long id) {
         model.addAttribute("user", userService.getUser(id));
-        return "users_detail";
+        return "user/detail";
     }
 
-    //@PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/add")
+    @GetMapping("/create")
     public String add(Model model) {
         model.addAttribute("user", new User());
-        return "users_add";
+        return "user/create";
     }
 
-    //@PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/{id}/edit")
+    @GetMapping("/update/{id}")
     public String edit(Model model, @PathVariable long id) {
         model.addAttribute("user", userService.getUser(id));
-        return "users_add";
+        return "user/create";
     }
 
-    //@PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/save")
+    @PostMapping("/create")
     public String addSave(@ModelAttribute User user) {
+
+        var oldUser = userService.getUser(user.getId());
+        user.setPassword(oldUser.getPassword());
+
         userService.saveUser(user);
-        return "redirect:/users/";
+        return "redirect:/user/" + user.getId();
     }
 
-    //@PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/{id}/delete")
-    public String delete(Model model, @PathVariable long id) {
-        model.addAttribute("user", userService.getUser(id));
-        return "users_delete";
-    }
-
-    //@PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/{id}/delete")
+    @PostMapping("/delete/{id}")
     public String deleteConfirm(@PathVariable long id) {
-        userService.deleteUser(id);
-        return "redirect:/users/";
+
+        var user = userService.getUser(id);
+
+        var comments = user.getComments();
+
+        for (var comment : comments) {
+            commentService.delete(comment.getId());
+        }
+
+        userService.deleteUser(user.getId());
+
+        return "redirect:/user";
     }
 }

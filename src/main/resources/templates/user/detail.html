@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<body>
+<main layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title ms-2"
+                                    th:text="${user.username} + ' (' + ${user.role} + ')'"></h5>
+                                <p class="card-text ms-2">
+                                    <strong>Login: </strong><span th:text="${user.username}"></span><br>
+                                    <strong>Name: </strong><span th:text="${user.name}"></span><br>
+                                 </p>
+                                <div>
+                                    <h4 class="card-title ms-2">Comments</h4>
+                                    <span class="card-text ms-2" >
+                                        <form th:each="comment : ${user.comments}" th:action="'/comment/delete/' + ${comment.id}" class="m-2" method="post">
+                                            <strong th:text="${user.name}"></strong>
+                                            <p th:text="${comment.text}"></p>
+                                            (Film) <a th:text="${comment.film.name}" th:href="'/film/'+${comment.film.id}"></a>
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                            <a class="btn btn-sm btn-secondary" th:href="'/comment/update/'+${comment.id}">Update</a>
+                                        </form>
+                                        <br>
+                                    </span>
+                                </div>
+
+                                <br>
+                                <div class="d-flex">
+                                    <a class="btn btn-primary m-2" th:href="'/user'">Back to list</a>
+                                    <a class="btn btn-secondary m-2" th:href="'/user/update' + ${user.id}">Update</a>
+                                    <form method="post" th:action="'/user/delete' + ${user.id}">
+                                        <button class="btn btn-danger m-2">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>

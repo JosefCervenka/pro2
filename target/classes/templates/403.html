@@ -1,11 +1,12 @@
 <!-- src/main/resources/templates/custom403.html -->
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Forbidden</title>
-</head>
-<body>
-<h1>403 - Forbidden</h1>
-<p>Sorry, you don't have permission to access this page.</p>
-</body>
-</html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<main layout:fragment="content">
+    <h1>403 - Forbidden</h1>
+    <p>Sorry, you don't have permission to access this page.</p>
+
+    <a class="btn btn-link" href="/">Return back</a>
+</main>

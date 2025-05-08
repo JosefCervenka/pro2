@@ -8,7 +8,7 @@
 
     <h3 th:text="${#authentication.name}"></h3>
 
-    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/users/}">List of Users</a><br>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/user}">List of Users</a><br>
     <a th:href="@{/person}">List of persons</a><br>
     <a th:href="@{/film}">List of films</a><br>
 
